@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { ApiResponse, TravelNote } from "~/types";
+import type { ApiResponse, TravelNote } from "~~/types";
 
 const NoteCreateSchema = z.object({
   country_code: z.string().length(3),

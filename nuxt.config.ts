@@ -10,8 +10,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    countriesApiKey: process.env.REST_COUNTRIES_API_KEY || "rc_live_demo",
+    countriesApiBase: "https://api.restcountries.com/countries/v5",
     public: {
-      countriesApiKey: process.env.REST_COUNTRIES_API_KEY || "rc_live_demo",
       countriesApiBase: "https://api.restcountries.com/countries/v5",
     },
   },

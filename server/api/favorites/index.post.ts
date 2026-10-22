@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { ApiResponse, FavoriteCountry } from "~/types";
+import type { ApiResponse, FavoriteCountry } from "~~/types";
 
 const BodySchema = z.object({
   country_code: z.string().length(3),

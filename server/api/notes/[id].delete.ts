@@ -1,5 +1,5 @@
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { ApiResponse } from "~/types";
+import type { ApiResponse } from "~~/types";
 
 export default defineEventHandler(
   async (event): Promise<ApiResponse<{ message: string }>> => {

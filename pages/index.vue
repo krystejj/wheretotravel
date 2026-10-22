@@ -110,21 +110,13 @@ const addToFavorites = async (country: NormalizedCountry) => {
 <template>
   <div class="space-y-8">
     <div
-      class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary-600 to-indigo-700 text-white p-8 sm:p-12 shadow-xl"
+      class="relative overflow-hidden rounded-3xl bg-violet-600 dark:bg-violet-700 text-white p-8 sm:p-12 shadow-lg"
     >
       <div class="relative z-10 max-w-2xl space-y-4">
-        <UBadge
-          color="white"
-          variant="solid"
-          size="md"
-          class="text-primary-700 font-semibold"
-        >
-          Otwarte Dane Publiczne (REST Countries v5)
-        </UBadge>
         <h1 class="text-3xl sm:text-5xl font-black tracking-tight">
           Odkrywaj państwa całego świata
         </h1>
-        <p class="text-primary-100 text-base sm:text-lg">
+        <p class="text-violet-100 text-base sm:text-lg">
           Przeglądaj aktualne statystyki demograficzne, porównuj kraje na
           interaktywnych wykresach i planuj swoje wymarzone podróże.
         </p>

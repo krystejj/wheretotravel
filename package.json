@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.12.0",
+    "@nuxt/ui": "^2.22.3",
     "@nuxtjs/supabase": "^2.1.0",
     "chart.js": "^4.6.1",
     "leaflet": "^1.9.4",

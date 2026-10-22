@@ -1,5 +1,4 @@
-import { CountriesService } from "~/server/utils/countriesService";
-import type { ApiResponse, NormalizedCountry } from "~/types";
+import type { ApiResponse, NormalizedCountry } from "~~/types";
 
 export default defineEventHandler(
   async (event): Promise<ApiResponse<NormalizedCountry[]>> => {

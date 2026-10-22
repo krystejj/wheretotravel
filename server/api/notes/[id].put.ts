@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { serverSupabaseClient, serverSupabaseUser } from "#supabase/server";
-import type { ApiResponse, TravelNote } from "~/types";
+import type { ApiResponse, TravelNote } from "~~/types";
 
 const NoteUpdateSchema = z.object({
   title: z.string().min(3).max(120).optional(),

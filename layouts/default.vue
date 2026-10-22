@@ -44,16 +44,8 @@ const navLinks = [
       >
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 group">
-          <div
-            class="p-2 rounded-xl bg-primary-500/10 text-primary-500 group-hover:scale-105 transition-transform"
-          >
-            <UIcon
-              name="i-heroicons-paper-airplane"
-              class="w-6 h-6 rotate-45"
-            />
-          </div>
           <span
-            class="text-xl font-black tracking-tight bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent"
+            class="text-xl font-black tracking-tight text-violet-600 dark:text-violet-400"
           >
             WhereToTravel
           </span>

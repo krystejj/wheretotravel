@@ -120,15 +120,24 @@ const handleCreateNote = async () => {
         class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm"
       >
         <div class="grid grid-cols-1 lg:grid-cols-2">
-          <div class="h-72 lg:h-auto bg-gray-100 dark:bg-gray-800 relative">
+          <div
+            class="relative overflow-hidden bg-gray-100/60 dark:bg-gray-950 flex items-center justify-center min-h-[300px] lg:min-h-[420px] p-6 sm:p-10"
+          >
             <img
               :src="country.flag"
               :alt="country.flagAlt"
-              class="w-full h-full object-cover"
+              class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 dark:opacity-30 scale-125 pointer-events-none"
             />
+
+            <img
+              :src="country.flag"
+              :alt="country.flagAlt"
+              class="relative z-10 max-h-[220px] lg:max-h-[280px] w-auto max-w-full object-contain rounded-xl shadow-2xl border border-white/20 dark:border-white/10"
+            />
+
             <UBadge
               color="primary"
-              class="absolute top-4 left-4 text-base font-bold shadow-lg"
+              class="absolute top-4 left-4 z-20 text-sm font-bold shadow-md"
             >
               {{ country.cca3 }}
             </UBadge>
