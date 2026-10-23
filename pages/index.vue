@@ -109,23 +109,6 @@ const addToFavorites = async (country: NormalizedCountry) => {
 
 <template>
   <div class="space-y-8">
-    <!-- Banner -->
-    <div
-      class="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 rounded-2xl p-8 sm:p-12 relative overflow-hidden shadow-sm"
-    >
-      <div class="max-w-2xl space-y-4">
-        <h1
-          class="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white"
-        >
-          Odkrywaj państwa całego świata.
-        </h1>
-        <p class="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg">
-          Analizuj dane demograficzne i geograficzne, porównuj statystyki na
-          wykresach i twórz własne plany podróży.
-        </p>
-      </div>
-    </div>
-
     <!-- Pasek filtrowania i wyszukiwania -->
     <div
       class="bg-white dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 shadow-sm"
