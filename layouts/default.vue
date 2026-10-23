@@ -3,25 +3,18 @@ const user = useSupabaseUser();
 const supabase = useSupabaseClient();
 const router = useRouter();
 const toast = useToast();
-
 const isMobileMenuOpen = ref(false);
 
 const handleLogout = async () => {
   try {
     await supabase.auth.signOut();
-    toast.add({
-      title: "Wylogowano pomyślnie",
-      description: "Do zobaczenia w kolejnej podróży!",
-      color: "green",
-      icon: "i-heroicons-check-circle",
-    });
+    toast.add({ title: "Wylogowano pomyślnie", color: "gray" });
     router.push("/");
   } catch (error: any) {
     toast.add({
       title: "Błąd wylogowywania",
       description: error.message,
       color: "red",
-      icon: "i-heroicons-exclamation-triangle",
     });
   }
 };
@@ -35,23 +28,22 @@ const navLinks = [
 
 <template>
   <div class="flex flex-col min-h-screen">
-    <!-- Górny pasek nawigacji -->
     <header
-      class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800"
+      class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-black/80 border-b border-zinc-200 dark:border-zinc-800/80 transition-colors"
     >
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
       >
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 group">
+        <NuxtLink to="/" class="flex items-center gap-2.5 group">
           <span
-            class="text-xl font-black tracking-tight text-violet-600 dark:text-violet-400"
+            class="text-base font-bold tracking-tight text-zinc-900 dark:text-white"
           >
             WhereToTravel
           </span>
         </NuxtLink>
 
-        <!-- Linki na desktopie -->
+        <!-- Linki (desktop) -->
         <nav class="hidden md:flex items-center gap-1">
           <UButton
             v-for="link in navLinks"
@@ -59,8 +51,7 @@ const navLinks = [
             :to="link.to"
             variant="ghost"
             color="gray"
-            :icon="link.icon"
-            class="font-medium"
+            class="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm font-medium"
           >
             {{ link.label }}
           </UButton>
@@ -69,26 +60,26 @@ const navLinks = [
             to="/dashboard"
             variant="ghost"
             color="gray"
-            icon="i-heroicons-bookmark-square"
-            class="font-medium"
+            class="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm font-medium"
           >
             Mój Panel
           </UButton>
         </nav>
 
-        <!-- Przyciski akcji i profil -->
+        <!-- Akcje i toggle motywu -->
         <div class="hidden md:flex items-center gap-3">
           <UColorModeButton />
 
           <template v-if="user">
-            <UBadge color="primary" variant="subtle" size="md">
+            <span
+              class="text-xs text-zinc-600 dark:text-zinc-400 font-mono bg-zinc-100 dark:bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-200 dark:border-zinc-800"
+            >
               {{ user.email }}
-            </UBadge>
+            </span>
             <UButton
-              color="red"
-              variant="soft"
+              color="gray"
+              variant="outline"
               size="sm"
-              icon="i-heroicons-arrow-left-on-rectangle"
               @click="handleLogout"
             >
               Wyloguj
@@ -96,10 +87,21 @@ const navLinks = [
           </template>
 
           <template v-else>
-            <UButton to="/login" variant="ghost" color="gray" size="sm">
+            <UButton
+              to="/login"
+              variant="ghost"
+              color="gray"
+              size="sm"
+              class="text-zinc-700 dark:text-zinc-300"
+            >
               Zaloguj się
             </UButton>
-            <UButton to="/register" color="primary" size="sm">
+            <UButton
+              to="/register"
+              color="gray"
+              size="sm"
+              class="font-semibold bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+            >
               Rejestracja
             </UButton>
           </template>
@@ -122,7 +124,7 @@ const navLinks = [
       <!-- Menu mobilne -->
       <div
         v-if="isMobileMenuOpen"
-        class="md:hidden border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pt-2 pb-4 space-y-2"
+        class="md:hidden border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 pt-2 pb-4 space-y-2"
       >
         <UButton
           v-for="link in navLinks"
@@ -130,8 +132,8 @@ const navLinks = [
           :to="link.to"
           variant="ghost"
           color="gray"
-          :icon="link.icon"
           block
+          class="justify-start text-zinc-700 dark:text-zinc-300"
           @click="isMobileMenuOpen = false"
         >
           {{ link.label }}
@@ -141,23 +143,19 @@ const navLinks = [
           to="/dashboard"
           variant="ghost"
           color="gray"
-          icon="i-heroicons-bookmark-square"
           block
+          class="justify-start text-zinc-700 dark:text-zinc-300"
           @click="isMobileMenuOpen = false"
         >
           Mój Panel
         </UButton>
 
-        <div class="pt-2 border-t border-gray-200 dark:border-gray-800">
+        <div class="pt-2 border-t border-zinc-200 dark:border-zinc-800">
           <template v-if="user">
-            <div class="text-xs text-gray-500 mb-2 truncate">
-              Zalogowano: {{ user.email }}
-            </div>
             <UButton
-              color="red"
-              variant="soft"
+              color="gray"
+              variant="ghost"
               block
-              icon="i-heroicons-arrow-left-on-rectangle"
               @click="
                 handleLogout();
                 isMobileMenuOpen = false;
@@ -170,50 +168,48 @@ const navLinks = [
             <div class="grid grid-cols-2 gap-2">
               <UButton
                 to="/login"
-                variant="outline"
+                variant="ghost"
                 color="gray"
                 block
                 @click="isMobileMenuOpen = false"
+                >Logowanie</UButton
               >
-                Logowanie
-              </UButton>
               <UButton
                 to="/register"
-                color="primary"
+                color="gray"
                 block
+                class="bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
                 @click="isMobileMenuOpen = false"
+                >Rejestracja</UButton
               >
-                Rejestracja
-              </UButton>
             </div>
           </template>
         </div>
       </div>
     </header>
 
-    <!-- Główna zawartość strony -->
+    <!-- Główna zawartość -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <slot />
     </main>
 
     <!-- Stopka -->
     <footer
-      class="border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 py-6"
+      class="border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black py-8 mt-12 text-xs text-zinc-500"
     >
       <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4"
       >
         <div>WhereToTravel</div>
         <div class="flex items-center gap-2">
-          <span>Źródło danych:</span>
+          <span>Dane: </span>
           <a
             href="https://restcountries.com"
             target="_blank"
             rel="noopener"
-            class="text-primary-500 hover:underline"
+            class="text-zinc-600 dark:text-zinc-400 hover:underline"
+            >REST Countries v5.0</a
           >
-            REST Countries v5.0 API
-          </a>
         </div>
       </div>
     </footer>

@@ -5,6 +5,12 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/ui", "@nuxtjs/supabase"],
 
+  colorMode: {
+    preference: "system",
+    fallback: "light",
+    classSuffix: "",
+  },
+
   supabase: {
     redirect: false,
   },

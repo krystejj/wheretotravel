@@ -145,9 +145,14 @@ const handleCreateNote = async () => {
 
           <div class="p-8 sm:p-10 flex flex-col justify-between space-y-6">
             <div>
-              <UBadge color="gray" variant="subtle" size="md" class="mb-2">
+              <div
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 w-fit mb-3"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500"
+                ></span>
                 {{ country.region }} • {{ country.subregion }}
-              </UBadge>
+              </div>
               <h1 class="text-3xl sm:text-4xl font-black tracking-tight">
                 {{ country.name }}
               </h1>
@@ -158,45 +163,65 @@ const handleCreateNote = async () => {
 
             <!-- Informacje o kraju -->
             <div
-              class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-100 dark:border-gray-800"
+              class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800"
             >
-              <div>
-                <span class="text-xs text-gray-500 block">Stolica</span>
-                <span class="text-base font-bold">{{ country.capital }}</span>
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Stolica</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate block"
+                  >{{ country.capital }}</span
+                >
               </div>
-              <div>
-                <span class="text-xs text-gray-500 block">Populacja</span>
-                <span class="text-base font-bold">{{
-                  country.population.toLocaleString("pl-PL")
-                }}</span>
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Populacja</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 block"
+                  >{{ country.population.toLocaleString("pl-PL") }}</span
+                >
               </div>
-              <div>
-                <span class="text-xs text-gray-500 block">Powierzchnia</span>
-                <span class="text-base font-bold"
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Powierzchnia</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 block"
                   >{{ country.area.toLocaleString("pl-PL") }} km²</span
                 >
               </div>
-              <div>
-                <span class="text-xs text-gray-500 block"
-                  >Gęstość zaludnienia</span
-                >
-                <span class="text-base font-bold"
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Gęstość</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 block"
                   >{{ country.density }} os./km²</span
                 >
               </div>
-              <div>
-                <span class="text-xs text-gray-500 block">Języki</span>
-                <span class="text-base font-bold truncate block">{{
-                  country.languages.join(", ")
-                }}</span>
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Języki</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate block"
+                  >{{ country.languages.join(", ") }}</span
+                >
               </div>
-              <div>
-                <span class="text-xs text-gray-500 block">Waluta</span>
-                <span class="text-base font-bold truncate block">{{
-                  country.currencies
-                    .map((c) => `${c.code} (${c.symbol})`)
-                    .join(", ")
-                }}</span>
+              <div
+                class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80"
+              >
+                <span class="text-xs text-zinc-500 block">Waluta</span>
+                <span
+                  class="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate block"
+                  >{{
+                    country.currencies
+                      .map((c) => `${c.code} (${c.symbol})`)
+                      .join(", ")
+                  }}</span
+                >
               </div>
             </div>
 
@@ -209,19 +234,17 @@ const handleCreateNote = async () => {
                 v-if="country.borders.length > 0"
                 class="flex flex-wrap gap-2"
               >
-                <UButton
+                <NuxtLink
                   v-for="border in country.borders"
                   :key="border"
                   :to="`/countries/${border}`"
-                  size="xs"
-                  color="gray"
-                  variant="solid"
+                  class="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-800 transition-colors"
                 >
                   {{ border }}
-                </UButton>
+                </NuxtLink>
               </div>
               <span v-else class="text-sm text-gray-400 italic"
-                >Brak granic lądowych (np. państwo wyspiarskie)</span
+                >Brak granic lądowych (np. wyspa)</span
               >
             </div>
           </div>

@@ -109,30 +109,33 @@ const addToFavorites = async (country: NormalizedCountry) => {
 
 <template>
   <div class="space-y-8">
+    <!-- Banner -->
     <div
-      class="relative overflow-hidden rounded-3xl bg-violet-600 dark:bg-violet-700 text-white p-8 sm:p-12 shadow-lg"
+      class="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 rounded-2xl p-8 sm:p-12 relative overflow-hidden shadow-sm"
     >
-      <div class="relative z-10 max-w-2xl space-y-4">
-        <h1 class="text-3xl sm:text-5xl font-black tracking-tight">
-          Odkrywaj państwa całego świata
+      <div class="max-w-2xl space-y-4">
+        <h1
+          class="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white"
+        >
+          Odkrywaj państwa całego świata.
         </h1>
-        <p class="text-violet-100 text-base sm:text-lg">
-          Przeglądaj aktualne statystyki demograficzne, porównuj kraje na
-          interaktywnych wykresach i planuj swoje wymarzone podróże.
+        <p class="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg">
+          Analizuj dane demograficzne i geograficzne, porównuj statystyki na
+          wykresach i twórz własne plany podróży.
         </p>
       </div>
     </div>
 
     <!-- Pasek filtrowania i wyszukiwania -->
     <div
-      class="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+      class="bg-white dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 shadow-sm"
     >
       <div class="lg:col-span-2">
         <UInput
           v-model="searchQuery"
           icon="i-heroicons-magnifying-glass"
-          placeholder="Szukaj państwa, stolicy lub kodu (np. Polska, Tokio, ISL)..."
-          size="lg"
+          placeholder="Szukaj państwa, stolicy lub kodu ISO..."
+          size="md"
         />
       </div>
       <div>
@@ -141,7 +144,7 @@ const addToFavorites = async (country: NormalizedCountry) => {
           :options="regionOptions"
           option-attribute="label"
           value-attribute="value"
-          size="lg"
+          size="md"
         />
       </div>
       <div>
@@ -150,7 +153,7 @@ const addToFavorites = async (country: NormalizedCountry) => {
           :options="sortOptions"
           option-attribute="label"
           value-attribute="value"
-          size="lg"
+          size="md"
         />
       </div>
     </div>
@@ -214,72 +217,65 @@ const addToFavorites = async (country: NormalizedCountry) => {
       v-else-if="filteredCountries.length > 0"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
-      <UCard
+      <div
         v-for="country in filteredCountries"
         :key="country.cca3"
-        :ui="{ body: { padding: 'p-0 sm:p-0' } }"
-        class="overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+        class="group flex flex-col justify-between bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-700 rounded-xl overflow-hidden transition-all duration-200 shadow-sm"
       >
-        <div class="relative group">
+        <div
+          class="relative bg-zinc-50 dark:bg-zinc-900/60 h-44 flex items-center justify-center p-4 border-b border-zinc-200 dark:border-zinc-800/80 overflow-hidden"
+        >
           <img
             :src="country.flag"
             :alt="country.flagAlt"
             loading="lazy"
-            class="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300 bg-gray-100 dark:bg-gray-800"
+            class="max-h-32 w-auto max-w-[85%] object-contain rounded-md shadow group-hover:scale-105 transition-transform duration-200"
           />
-          <UBadge
-            color="white"
-            variant="solid"
-            class="absolute top-3 right-3 shadow-md font-mono font-bold"
+          <span
+            class="absolute top-3 right-3 text-xs font-mono font-bold px-2 py-0.5 rounded bg-white/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
           >
             {{ country.cca3 }}
-          </UBadge>
+          </span>
         </div>
 
         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
           <div>
             <h2
-              class="text-xl font-bold tracking-tight truncate"
+              class="text-lg font-semibold text-zinc-900 dark:text-white tracking-tight truncate"
               :title="country.name"
             >
               {{ country.name }}
             </h2>
             <p
-              class="text-xs text-gray-500 truncate"
+              class="text-xs text-zinc-500 truncate"
               :title="country.officialName"
             >
               {{ country.officialName }}
             </p>
 
-            <div class="mt-4 space-y-1.5 text-sm">
+            <div class="mt-4 space-y-1.5 text-xs">
               <div
-                class="flex items-center justify-between text-gray-600 dark:text-gray-400"
+                class="flex items-center justify-between text-zinc-500 dark:text-zinc-400"
               >
-                <span class="flex items-center gap-1.5"
-                  ><UIcon name="i-heroicons-building-office-2" /> Stolica:</span
-                >
+                <span>Stolica</span>
                 <span
-                  class="font-medium text-gray-900 dark:text-gray-200 truncate max-w-[130px]"
+                  class="text-zinc-900 dark:text-zinc-200 font-medium truncate max-w-[140px]"
                   >{{ country.capital }}</span
                 >
               </div>
               <div
-                class="flex items-center justify-between text-gray-600 dark:text-gray-400"
+                class="flex items-center justify-between text-zinc-500 dark:text-zinc-400"
               >
-                <span class="flex items-center gap-1.5"
-                  ><UIcon name="i-heroicons-globe-alt" /> Region:</span
-                >
-                <span class="font-medium text-gray-900 dark:text-gray-200">{{
+                <span>Region</span>
+                <span class="text-zinc-900 dark:text-zinc-200 font-medium">{{
                   country.region
                 }}</span>
               </div>
               <div
-                class="flex items-center justify-between text-gray-600 dark:text-gray-400"
+                class="flex items-center justify-between text-zinc-500 dark:text-zinc-400"
               >
-                <span class="flex items-center gap-1.5"
-                  ><UIcon name="i-heroicons-user-group" /> Populacja:</span
-                >
-                <span class="font-medium text-gray-900 dark:text-gray-200">{{
+                <span>Populacja</span>
+                <span class="text-zinc-900 dark:text-zinc-200 font-medium">{{
                   country.population.toLocaleString("pl-PL")
                 }}</span>
               </div>
@@ -287,29 +283,37 @@ const addToFavorites = async (country: NormalizedCountry) => {
           </div>
 
           <div
-            class="flex items-center gap-2 pt-2 border-t border-gray-100 dark:border-gray-800"
+            class="flex items-center gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-900"
           >
-            <UButton
+            <NuxtLink
               :to="`/countries/${country.cca3}`"
-              color="primary"
-              variant="solid"
-              class="flex-1 justify-center"
-              icon="i-heroicons-eye"
+              class="flex-1 inline-flex items-center justify-center text-xs font-semibold py-2 px-3 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800/90 dark:text-zinc-200 dark:border-zinc-800 transition-colors"
             >
-              Szczegóły
-            </UButton>
-            <UTooltip text="Dodaj do listy podróży">
-              <UButton
-                color="red"
-                variant="soft"
-                icon="i-heroicons-heart"
-                :loading="addingCode === country.cca3"
-                @click="addToFavorites(country)"
+              Szczegóły &rarr;
+            </NuxtLink>
+
+            <button
+              type="button"
+              class="p-2 rounded-lg text-rose-500 bg-rose-50 hover:bg-rose-100 border border-rose-200 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 dark:border-rose-500/20 dark:text-rose-400 transition-colors flex items-center justify-center disabled:opacity-50"
+              :disabled="addingCode === country.cca3"
+              title="Dodaj do listy podróży"
+              @click="addToFavorites(country)"
+            >
+              <UIcon
+                :name="
+                  addingCode === country.cca3
+                    ? 'i-heroicons-arrow-path'
+                    : 'i-heroicons-heart'
+                "
+                :class="[
+                  'w-4 h-4',
+                  { 'animate-spin': addingCode === country.cca3 },
+                ]"
               />
-            </UTooltip>
+            </button>
           </div>
         </div>
-      </UCard>
+      </div>
     </div>
 
     <!-- Brak wyników -->
