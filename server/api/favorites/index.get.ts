@@ -12,10 +12,13 @@ export default defineEventHandler(
       };
     }
 
+    const userId = user.id || (user as any).sub;
     const client = await serverSupabaseClient(event);
+
     const { data, error } = await client
       .from("favorite_countries")
       .select("*")
+      .eq("user_id", userId)
       .order("created_at", { ascending: false });
 
     if (error) {

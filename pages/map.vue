@@ -17,9 +17,7 @@ const countries = computed(() => response.value?.data || []);
     <div
       class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
     >
-      <h1 class="text-3xl font-black tracking-tight">
-        Interaktywna Mapa Świata
-      </h1>
+      <h1 class="text-3xl font-black tracking-tight">Mapa Świata</h1>
       <p class="text-gray-500 text-sm mt-1">
         Kliknij punkt, aby zobaczyć podgląd.
       </p>

@@ -20,9 +20,9 @@ const handleLogout = async () => {
 };
 
 const navLinks = [
-  { label: "Odkrywaj", to: "/", icon: "i-heroicons-globe-europe-africa" },
-  { label: "Mapa Świata", to: "/map", icon: "i-heroicons-map" },
-  { label: "Porównywarka", to: "/compare", icon: "i-heroicons-chart-bar" },
+  { label: "Lista", to: "/", icon: "i-heroicons-globe-europe-africa" },
+  { label: "Mapa", to: "/map", icon: "i-heroicons-map" },
+  { label: "Porównywanie", to: "/compare", icon: "i-heroicons-chart-bar" },
 ];
 </script>
 
@@ -37,7 +37,7 @@ const navLinks = [
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2.5 group">
           <span
-            class="text-base font-bold tracking-tight text-zinc-900 dark:text-white"
+            class="text-lg font-bold tracking-tight text-zinc-900 dark:text-white"
           >
             WhereToTravel
           </span>
@@ -62,7 +62,7 @@ const navLinks = [
             color="gray"
             class="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm font-medium"
           >
-            Mój Panel
+            Zapisane
           </UButton>
         </nav>
 
@@ -71,15 +71,14 @@ const navLinks = [
           <UColorModeButton />
 
           <template v-if="user">
-            <span
-              class="text-xs text-zinc-600 dark:text-zinc-400 font-mono bg-zinc-100 dark:bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-200 dark:border-zinc-800"
-            >
-              {{ user.email }}
+            <span class="text-sm text-zinc-400 dark:text-zinc-200 px-2.5 py-1">
+              {{ user.user_metadata!.username }}
             </span>
             <UButton
               color="gray"
               variant="outline"
               size="sm"
+              class="text-zinc-700 dark:text-zinc-300 hover:bg-zinc-800"
               @click="handleLogout"
             >
               Wyloguj
@@ -102,7 +101,7 @@ const navLinks = [
               size="sm"
               class="font-semibold bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
-              Rejestracja
+              Zarejestruj się
             </UButton>
           </template>
         </div>
@@ -147,7 +146,7 @@ const navLinks = [
           class="justify-start text-zinc-700 dark:text-zinc-300"
           @click="isMobileMenuOpen = false"
         >
-          Mój Panel
+          Zapisane
         </UButton>
 
         <div class="pt-2 border-t border-zinc-200 dark:border-zinc-800">

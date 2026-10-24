@@ -25,11 +25,6 @@ const notes = computed(() => notesRes.value?.data || []);
 const removeFavorite = async (id: string) => {
   try {
     await $fetch(`/api/favorites/${id}`, { method: "DELETE" });
-    toast.add({
-      title: "Usunięto z listy ulubionych",
-      color: "green",
-      icon: "i-heroicons-check",
-    });
     refreshFavs();
   } catch (err: any) {
     toast.add({
@@ -68,7 +63,6 @@ const handleUpdateNote = async () => {
         rating: editRating.value,
       },
     });
-    toast.add({ title: "Notatka zaktualizowana!", color: "green" });
     isEditModalOpen.value = false;
     refreshNotes();
   } catch (err: any) {
@@ -87,7 +81,6 @@ const deleteNote = async (id: string) => {
   if (!confirm("Czy na pewno chcesz usunąć tę notatkę?")) return;
   try {
     await $fetch(`/api/notes/${id}`, { method: "DELETE" });
-    toast.add({ title: "Notatka została usunięta", color: "green" });
     refreshNotes();
   } catch (err: any) {
     toast.add({
@@ -100,7 +93,7 @@ const deleteNote = async (id: string) => {
 
 const tabItems = [
   { label: "Ulubione Państwa", icon: "i-heroicons-heart" },
-  { label: "Moje Notatki", icon: "i-heroicons-pencil-square" },
+  { label: "Notatki", icon: "i-heroicons-pencil-square" },
 ];
 </script>
 
@@ -108,16 +101,11 @@ const tabItems = [
   <div v-if="user" class="space-y-8">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-3xl font-black tracking-tight">
-          Twój Panel Podróżnika
-        </h1>
+        <h1 class="text-3xl font-black tracking-tight">Zapisane</h1>
         <p class="text-gray-500 text-sm mt-1">
-          Zarządzaj swoimi planami i zapisanymi kierunkami.
+          Zarządzaj swoimi zapisanymi krajami i notatkami.
         </p>
       </div>
-      <UBadge color="primary" variant="subtle" size="lg">
-        {{ user.email }}
-      </UBadge>
     </div>
 
     <UTabs :items="tabItems" class="w-full">
@@ -135,9 +123,6 @@ const tabItems = [
             <p class="text-gray-500">
               Nie dodałeś jeszcze żadnego państwa do ulubionych.
             </p>
-            <UButton to="/" color="primary" class="mt-4"
-              >Przeglądaj państwa</UButton
-            >
           </div>
 
           <div
@@ -190,10 +175,7 @@ const tabItems = [
               name="i-heroicons-document-text"
               class="w-12 h-12 text-gray-300 mx-auto mb-2"
             />
-            <p class="text-gray-500">
-              Brak utworzonych notatek. Wejdź na profil dowolnego kraju, aby
-              dodać pierwszą.
-            </p>
+            <p class="text-gray-500">Brak utworzonych notatek.</p>
           </div>
 
           <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -208,9 +190,6 @@ const tabItems = [
                       {{ note.title }}
                     </h3>
                   </div>
-                  <UBadge color="yellow" variant="subtle"
-                    >★ {{ note.rating }}/5</UBadge
-                  >
                 </div>
               </template>
               <p
@@ -257,13 +236,10 @@ const tabItems = [
           </h3>
         </template>
         <form @submit.prevent="handleUpdateNote" class="space-y-4">
-          <UFormGroup label="Tytuł" required>
+          <UFormGroup required>
             <UInput v-model="editTitle" />
           </UFormGroup>
-          <UFormGroup label="Ocena">
-            <USelect v-model="editRating" :options="[5, 4, 3, 2, 1]" />
-          </UFormGroup>
-          <UFormGroup label="Treść" required>
+          <UFormGroup required>
             <UTextarea v-model="editContent" rows="4" />
           </UFormGroup>
           <div class="flex justify-end gap-2 pt-4">
@@ -274,7 +250,7 @@ const tabItems = [
               >Anuluj</UButton
             >
             <UButton type="submit" color="primary" :loading="isUpdating"
-              >Zapisz zmiany</UButton
+              >Zapisz</UButton
             >
           </div>
         </form>

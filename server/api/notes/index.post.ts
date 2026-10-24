@@ -40,7 +40,7 @@ export default defineEventHandler(
     const { data, error } = await client
       .from("travel_notes")
       .insert({
-        user_id: user.id,
+        user_id: user.id || (user as any).sub,
         country_code: validation.data.country_code.toUpperCase(),
         title: validation.data.title,
         content: validation.data.content,

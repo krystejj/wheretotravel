@@ -19,7 +19,7 @@ export default defineEventHandler(
       .from("favorite_countries")
       .delete()
       .eq("id", id)
-      .eq("user_id", user.id);
+      .eq("user_id", user.id || (user as any).sub);
 
     if (error) {
       setResponseStatus(event, 500);

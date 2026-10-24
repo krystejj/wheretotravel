@@ -42,8 +42,8 @@ const handleRegister = async () => {
     if (error) throw error;
 
     toast.add({
-      title: "Rejestracja zakończona sukcesem!",
-      description: "Twoje konto jest aktywne. Możesz się zalogować.",
+      title: "Zarejestrowano!",
+      description: "Możesz się zalogować.",
       color: "green",
       icon: "i-heroicons-check-circle",
     });
@@ -66,38 +66,36 @@ const handleRegister = async () => {
     <UCard>
       <template #header>
         <div class="text-center">
-          <h1 class="text-2xl font-bold">Stwórz nowe konto</h1>
-          <p class="text-sm text-gray-500 mt-1">
-            Dołącz do WhereToTravel i planuj podróże
-          </p>
+          <h1 class="text-2xl font-bold">Zarejestruj sie</h1>
+          <p class="text-sm text-gray-500 mt-1">Dołącz do WhereToTravel</p>
         </div>
       </template>
 
       <form @submit.prevent="handleRegister" class="space-y-4">
-        <UFormGroup label="Nazwa użytkownika" required>
+        <UFormGroup required>
           <UInput
             v-model="username"
-            placeholder="np. Podróżnik123"
+            placeholder="Nazwa użytkownika"
             icon="i-heroicons-user"
             size="lg"
           />
         </UFormGroup>
 
-        <UFormGroup label="Adres E-mail" required>
+        <UFormGroup required>
           <UInput
             v-model="email"
             type="email"
-            placeholder="twoj@email.pl"
+            placeholder="Adres e-mail"
             icon="i-heroicons-envelope"
             size="lg"
           />
         </UFormGroup>
 
-        <UFormGroup label="Hasło (min. 6 znaków)" required>
+        <UFormGroup required>
           <UInput
             v-model="password"
             type="password"
-            placeholder="••••••••"
+            placeholder="Hasło"
             icon="i-heroicons-lock-closed"
             size="lg"
           />
@@ -105,27 +103,15 @@ const handleRegister = async () => {
 
         <UButton
           type="submit"
-          color="primary"
+          color="gray"
           block
           size="lg"
           :loading="loading"
-          class="mt-6"
+          class="font-semibold bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200 mt-6"
         >
           Zarejestruj konto
         </UButton>
       </form>
-
-      <template #footer>
-        <p class="text-center text-sm text-gray-500">
-          Masz już konto?
-          <NuxtLink
-            to="/login"
-            class="text-primary-500 font-semibold hover:underline"
-          >
-            Przejdź do logowania
-          </NuxtLink>
-        </p>
-      </template>
     </UCard>
   </div>
 </template>

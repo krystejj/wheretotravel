@@ -83,15 +83,16 @@ const addToFavorites = async (country: NormalizedCountry) => {
   try {
     const res = await $fetch<ApiResponse>("/api/favorites", {
       method: "POST",
+      headers: useRequestHeaders(["cookie"]) as Record<string, string>,
       body: { country_code: country.cca3, status: "want_to_visit" },
     });
 
     if (res.success) {
       toast.add({
         title: "Zapisano!",
-        description: `${country.name} dodano do Twojej listy "Chcę odwiedzić".`,
+        description: `${country.name} dodano do Twojej listy.`,
         color: "green",
-        icon: "i-heroicons-heart",
+        icon: "i-heroicons-check-circle",
       });
     }
   } catch (err: any) {
@@ -117,7 +118,7 @@ const addToFavorites = async (country: NormalizedCountry) => {
         <UInput
           v-model="searchQuery"
           icon="i-heroicons-magnifying-glass"
-          placeholder="Szukaj państwa, stolicy lub kodu ISO..."
+          placeholder="Szukaj państwa..."
           size="md"
         />
       </div>
@@ -161,12 +162,9 @@ const addToFavorites = async (country: NormalizedCountry) => {
         name="i-heroicons-exclamation-triangle"
         class="w-12 h-12 text-red-500 mx-auto mb-3"
       />
-      <h3 class="text-lg font-bold text-red-800 dark:text-red-300">
-        Błąd komunikacji z zewnętrznym API
-      </h3>
+      <h3 class="text-lg font-bold text-red-800 dark:text-red-300">Błąd API</h3>
       <p class="text-sm text-red-600 dark:text-red-400 mt-1 max-w-md mx-auto">
-        Nie udało się pobrać danych z REST Countries API. Sprawdź połączenie z
-        internetem.
+        Nie udało się pobrać danych z API. Sprawdź połączenie z internetem.
       </p>
       <UButton
         color="red"
@@ -310,7 +308,7 @@ const addToFavorites = async (country: NormalizedCountry) => {
       />
       <h3 class="text-lg font-bold">Brak państw spełniających kryteria</h3>
       <p class="text-sm text-gray-500 mt-1">
-        Zmień frazę wyszukiwania lub zresetuj filtr regionu.
+        Zmień frazę wyszukiwania lub filtry.
       </p>
     </div>
   </div>

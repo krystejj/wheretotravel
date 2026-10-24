@@ -244,7 +244,7 @@ const handleCreateNote = async () => {
                 </NuxtLink>
               </div>
               <span v-else class="text-sm text-gray-400 italic"
-                >Brak granic lądowych (np. wyspa)</span
+                >Brak granic lądowych</span
               >
             </div>
           </div>
@@ -257,9 +257,9 @@ const handleCreateNote = async () => {
       >
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-2xl font-bold">Twoje notatki i plany podróży</h2>
+            <h2 class="text-2xl font-bold">Twoje notatki</h2>
             <p class="text-sm text-gray-500">
-              Zapisuj wspomnienia, porady i planowane atrakcje dla tego kraju.
+              Zapisuj wspomnienia i porady dla tego kraju.
             </p>
           </div>
           <UButton
@@ -277,8 +277,7 @@ const handleCreateNote = async () => {
           class="p-6 text-center bg-gray-50 dark:bg-gray-800/50 rounded-2xl"
         >
           <p class="text-gray-500 text-sm">
-            Zaloguj się, aby tworzyć i zarządzać notatkami dotyczącymi tego
-            kraju.
+            Zaloguj się, aby tworzyć i zarządzać notatkami.
           </p>
           <UButton to="/login" color="primary" variant="soft" class="mt-3"
             >Zaloguj się</UButton
@@ -289,8 +288,7 @@ const handleCreateNote = async () => {
           v-else-if="notes.length === 0"
           class="p-6 text-center text-gray-400 italic"
         >
-          Brak notatek dla tego państwa. Dodaj pierwszą notatkę powyższym
-          przyciskiem!
+          Brak notatek dla tego państwa.
         </div>
 
         <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -298,9 +296,6 @@ const handleCreateNote = async () => {
             <template #header>
               <div class="flex items-center justify-between">
                 <h3 class="font-bold text-lg">{{ note.title }}</h3>
-                <UBadge color="yellow" variant="subtle"
-                  >★ {{ note.rating }}/5</UBadge
-                >
               </div>
             </template>
             <p
@@ -324,38 +319,16 @@ const handleCreateNote = async () => {
       <UModal v-model="isModalOpen">
         <UCard>
           <template #header>
-            <h3 class="font-bold text-lg">Nowa notatka: {{ country.name }}</h3>
+            <h3 class="font-bold text-lg">Nowa notatka</h3>
           </template>
 
           <form @submit.prevent="handleCreateNote" class="space-y-4">
-            <UFormGroup label="Tytuł notatki" required>
-              <UInput
-                v-model="noteTitle"
-                placeholder="np. Wyjazd majowy / Co zobaczyć"
-              />
+            <UFormGroup required>
+              <UInput v-model="noteTitle" placeholder="Tytuł" />
             </UFormGroup>
 
-            <UFormGroup label="Ocena / Priorytet (1-5)">
-              <USelect
-                v-model="noteRating"
-                :options="[
-                  { label: '5 - Bardzo wysoki', value: 5 },
-                  { label: '4 - Wysoki', value: 4 },
-                  { label: '3 - Średni', value: 3 },
-                  { label: '2 - Niski', value: 2 },
-                  { label: '1 - Minimalny', value: 1 },
-                ]"
-                option-attribute="label"
-                value-attribute="value"
-              />
-            </UFormGroup>
-
-            <UFormGroup label="Treść notatki" required>
-              <UTextarea
-                v-model="noteContent"
-                placeholder="Wpisz swoje plany, porady, miejsca do odwiedzenia..."
-                rows="4"
-              />
+            <UFormGroup required>
+              <UTextarea v-model="noteContent" placeholder="Treść" rows="4" />
             </UFormGroup>
 
             <div class="flex justify-end gap-2 pt-4">
@@ -363,7 +336,7 @@ const handleCreateNote = async () => {
                 >Anuluj</UButton
               >
               <UButton type="submit" color="primary" :loading="isSubmitting"
-                >Zapisz notatkę</UButton
+                >Zapisz</UButton
               >
             </div>
           </form>

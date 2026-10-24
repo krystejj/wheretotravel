@@ -25,21 +25,13 @@ const countrySelectOptions = computed(() => {
 
 <template>
   <div class="space-y-8">
-    <div>
-      <h1 class="text-3xl font-black tracking-tight">
-        Porównywarka Państw i Statystyk
-      </h1>
-      <p class="text-gray-500 text-sm mt-1">
-        Wybierz do 4 państw, aby zestawić ich dane demograficzne, geograficzne i
-        inne.
-      </p>
-    </div>
+    <h1 class="text-3xl font-black tracking-tight">Porównywarka Państw</h1>
 
     <!-- Wybór państw -->
     <UCard>
       <div class="space-y-3">
         <label class="text-sm font-semibold"
-          >Wybierz państwa do porównania (max 4):</label
+          >Wybierz państwa do porównania:</label
         >
         <USelectMenu
           v-model="selectedCodes"
@@ -64,10 +56,6 @@ const countrySelectOptions = computed(() => {
 
       <!-- Tabela Porównawcza -->
       <UCard class="overflow-x-auto">
-        <template #header>
-          <h2 class="text-lg font-bold">Zestawienie Tabelaryczne</h2>
-        </template>
-
         <table class="w-full text-left border-collapse text-sm">
           <thead>
             <tr class="border-b border-gray-200 dark:border-gray-800">

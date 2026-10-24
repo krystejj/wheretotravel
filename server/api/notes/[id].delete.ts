@@ -19,7 +19,7 @@ export default defineEventHandler(
       .from("travel_notes")
       .delete()
       .eq("id", id)
-      .eq("user_id", user.id);
+      .eq("user_id", user.id || (user as any).sub);
 
     if (error) {
       setResponseStatus(event, 500);

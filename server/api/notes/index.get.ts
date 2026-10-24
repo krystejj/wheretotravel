@@ -19,6 +19,7 @@ export default defineEventHandler(
     let dbQuery = client
       .from("travel_notes")
       .select("*")
+      .eq("user_id", user.id || (user as any).sub)
       .order("created_at", { ascending: false });
 
     if (countryCode) {

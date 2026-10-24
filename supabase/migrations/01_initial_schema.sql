@@ -8,13 +8,7 @@ CREATE TABLE public.profiles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
-ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Public profiles are viewable by everyone"
-    ON public.profiles FOR SELECT USING (true);
-
-CREATE POLICY "Users can update their own profile"
-    ON public.profiles FOR UPDATE USING (auth.uid() = id);
+ALTER TABLE public.profiles DISABLE ROW LEVEL SECURITY;
 
 -- Automatyczne tworzenie profilu po rejestracji nowego użytkownika
 CREATE OR REPLACE FUNCTION public.handle_new_user()
@@ -41,13 +35,7 @@ CREATE TABLE public.favorite_countries (
     UNIQUE (user_id, country_code)
 );
 
-ALTER TABLE public.favorite_countries ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Users can manage their own favorites"
-    ON public.favorite_countries
-    FOR ALL
-    USING (auth.uid() = user_id)
-    WITH CHECK (auth.uid() = user_id);
+ALTER TABLE public.favorite_countries DISABLE ROW LEVEL SECURITY;
 
 
 -- Tabela notatek
@@ -63,10 +51,4 @@ CREATE TABLE public.travel_notes (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
-ALTER TABLE public.travel_notes ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Users can manage their own travel notes"
-    ON public.travel_notes
-    FOR ALL
-    USING (auth.uid() = user_id)
-    WITH CHECK (auth.uid() = user_id);
+ALTER TABLE public.travel_notes DISABLE ROW LEVEL SECURITY;

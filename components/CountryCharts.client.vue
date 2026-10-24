@@ -42,7 +42,7 @@ const areaData = computed(() => ({
   labels: props.countries.map((c) => c.name),
   datasets: [
     {
-      label: "Powierzchnia (km²)",
+      label: "Powierzchnia [km²]",
       backgroundColor: "#10b981",
       borderRadius: 8,
       data: props.countries.map((c) => c.area),
@@ -66,7 +66,7 @@ const chartOptions = {
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
     <UCard>
       <template #header>
-        <h3 class="font-bold text-base">Porównanie Populacji</h3>
+        <h3 class="font-bold text-base">Populacja</h3>
       </template>
       <div class="h-72">
         <Bar :data="populationData" :options="chartOptions" />
@@ -75,7 +75,7 @@ const chartOptions = {
 
     <UCard>
       <template #header>
-        <h3 class="font-bold text-base">Porównanie Powierzchni (km²)</h3>
+        <h3 class="font-bold text-base">Powierzchnia</h3>
       </template>
       <div class="h-72">
         <Bar :data="areaData" :options="chartOptions" />

@@ -47,7 +47,7 @@ onMounted(async () => {
         <div style="font-size: 12px; color: #555; margin-top: 2px;">Stolica: <b>${country.capital}</b></div>
         <div style="font-size: 12px; color: #555;">Populacja: <b>${country.population.toLocaleString("pl-PL")}</b></div>
         <a href="/countries/${country.cca3}" style="display: block; margin-top: 8px; text-align: center; background: #2563eb; color: #fff; padding: 5px 8px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 600;">
-          Zobacz profil kraju &rarr;
+          Zobacz profil kraju
         </a>
       </div>
     `;

@@ -43,7 +43,7 @@ export default defineEventHandler(
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)
-      .eq("user_id", user.id)
+      .eq("user_id", user.id || (user as any).sub)
       .select()
       .single();
 

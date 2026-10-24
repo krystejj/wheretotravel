@@ -23,15 +23,7 @@ const handleLogin = async () => {
       email: email.value,
       password: password.value,
     });
-
     if (error) throw error;
-
-    toast.add({
-      title: "Zalogowano pomyślnie!",
-      description: "Witaj z powrotem w WhereToTravel.",
-      color: "green",
-      icon: "i-heroicons-check-circle",
-    });
     router.push("/dashboard");
   } catch (error: any) {
     toast.add({
@@ -53,27 +45,27 @@ const handleLogin = async () => {
         <div class="text-center">
           <h1 class="text-2xl font-bold">Zaloguj się</h1>
           <p class="text-sm text-gray-500 mt-1">
-            Uzyskaj dostęp do ulubionych krajów i notatek
+            Uzyskaj dostęp do swoich zapisanych krajów i notatek
           </p>
         </div>
       </template>
 
       <form @submit.prevent="handleLogin" class="space-y-4">
-        <UFormGroup label="Adres E-mail" required>
+        <UFormGroup required>
           <UInput
             v-model="email"
             type="email"
-            placeholder="twoj@email.pl"
+            placeholder="Adres e-mail"
             icon="i-heroicons-envelope"
             size="lg"
           />
         </UFormGroup>
 
-        <UFormGroup label="Hasło" required>
+        <UFormGroup required>
           <UInput
             v-model="password"
             type="password"
-            placeholder="••••••••"
+            placeholder="Hasło"
             icon="i-heroicons-lock-closed"
             size="lg"
           />
@@ -81,27 +73,15 @@ const handleLogin = async () => {
 
         <UButton
           type="submit"
-          color="primary"
+          color="gray"
           block
           size="lg"
           :loading="loading"
-          class="mt-6"
+          class="font-semibold bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200 mt-6"
         >
           Zaloguj się
         </UButton>
       </form>
-
-      <template #footer>
-        <p class="text-center text-sm text-gray-500">
-          Nie masz jeszcze konta?
-          <NuxtLink
-            to="/register"
-            class="text-primary-500 font-semibold hover:underline"
-          >
-            Zarejestruj się
-          </NuxtLink>
-        </p>
-      </template>
     </UCard>
   </div>
 </template>
